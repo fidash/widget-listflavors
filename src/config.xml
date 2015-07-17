@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<widget xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="openstack-listflavor-widget" version="0.0.1">
+  <details>
+    <title>OpenStack List Flavor Widget</title>
+    <email>bgrana@conwet.com</email>
+    <image>images/catalogue.png</image>
+    <smartphoneimage>images/catalogueSmartphone.png</smartphoneimage>
+    <description>Widget that shows a table with openStack flavors data</description>
+    <authors>bgrana</authors>
+  </details>
+  <requirements>
+    <feature name="StyledElements" />
+  </requirements>
+  <preferences>
+    <preference name="id" type="boolean" description="Activate to display the id column" label="ID" default="false" />
+    <preference name="name" type="boolean" description="Activate to display the name column" label="Name" default="true" />
+    <preference name="ram" type="boolean" description="Activate to display the ram column" label="Ram" default="true" />
+    <preference name="disk" type="boolean" description="Activate to display the disk column" label="Disk" default="true" />
+    <preference name="swap" type="boolean" description="Activate to display the swap column" label="Swap" default="false" />
+    <preference name="vcpus" type="boolean" description="Activate to display the vcpus column" label="VCPUs" default="true" />
+  </preferences>
+  <wiring>
+    <!--<outputendpoint name="flavor_id" type="text" label="Flavor ID" description="Sends flavor ID and OpenStack access." friendcode="flavor_id"/>-->
+  </wiring>
+  <contents src="index.html" useplatformstyle="true"/>
+  <rendering height="25" width="9"/>
+</widget>

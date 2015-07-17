@@ -1,0 +1,118 @@
+<table id="images_table" class="display" cellpadding="0" border="0" cellspacing="0" width="100%"></table>
+
+<!-- Loading animation -->
+<div class="loading hide">
+  <i class="fa fa-spinner fa-pulse"></i>
+</div>
+
+<div id="uploadImageModal" class="modal fade" style="top: 0px; display: none;" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-top:0; padding-bottom: 0;">
+        <a href="#" class="close" data-dismiss="modal">×</a>
+        <h3>Create an image</h3>
+      </div>
+      <form id="create_image_form" name="" autocomplete="" enctype="multipart/form-data">
+        <div class="modal-body clearfix">       
+          <div class="pull-left col-xs-6">
+            <fieldset>
+              <div class="form-group required">
+                <label class="control-label  required" for="x-image-meta-name">Name</label>
+                <div class=" ">
+                  <input class="form-control" id="x-image-meta-name" maxlength="255" name="x-image-meta-name" type="text">
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="control-label  " for="x-image-meta-file">Image File</label>
+                <span class="help-icon" data-toggle="tooltip" data-placement="top" title="Un archivo local que subir como imagen."><span class="glyphicon glyphicon-question-sign"></span></span>
+                <div class=" ">
+                  <input type="radio" name="image" class="form-control" value="file" checked="checked" /> <input type="file" class="form-control" id="x-image-meta-file" name="x-image-meta-file" />
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="control-label  " for="x-image-meta-location">Image URL</label>
+                <span class="help-icon" data-toggle="tooltip" data-placement="top" title="Una (HTTP) URL externa desde la que cargar la imagen."><span class="glyphicon glyphicon-question-sign"></span></span>
+                <div class=" ">
+                    <input type="radio" name="image" class="form-control" value="location" /> <input class="form-control" id="x-image-meta-location" maxlength="255" name="x-image-meta-location" type="text" placeholder="http://example.com/image.iso" disabled="disabled" />
+                    
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="control-label  required" for="x-image-meta-disk-format">Disk Format</label>
+                <div class=" ">
+                  <select class="form-control switchable" id="x-image-meta-disk-format" name="x-image-meta-disk-format">
+                    <option value="" selected="selected">Select format</option>
+                    <option value="aki">AKI - Amazon Kernel Image</option>
+                    <option value="ami">AMI - Amazon Machine Image</option>
+                    <option value="ari">ARI - Amazon Ramdisk Image</option>
+                    <option value="iso">ISO - Imagen de disco óptico</option>
+                    <option value="qcow2">QCOW2 - Emulador QEMU</option>
+                    <option value="raw">Fila</option>
+                    <option value="vdi">VDI</option>
+                    <option value="vhd">VHD</option>
+                    <option value="vmdk">VMDK</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="control-label  required" for="x-image-meta-container-format">Container Format</label>
+                <div class=" ">
+                  <select class="form-control switchable" id="x-image-meta-container-format" name="x-image-meta-container-format">
+                    <option value="" selected="selected">Select format</option>
+                    <option value="ovf">OVF - Container format</option>
+                    <option value="bare"> Bare - No container envelope for the image</option>
+                    <option value="aki">AKI - Amazon Kernel Image</option>
+                    <option value="ari">ARI - Amazon Ramdisk Image</option>
+                    <option value="ami">AMI - Amazon Machine Image</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="pull-right col-xs-6">
+            <fieldset>
+              <div class="form-group ">
+                <label class="control-label  " for="x-image-meta-min-disk">Minimum Disk (GB)</label>
+                <span class="help-icon" data-toggle="tooltip" data-placement="top" title="El tamaño mínimo de disco necesario para arrancar la imagen. Si no se especifica este valor se asume 0 (sin mínimo)."><span class="glyphicon glyphicon-question-sign"></span></span>
+                <div class=" ">
+                  <input class="form-control" id="x-image-meta-min-disk" min="0" name="x-image-meta-min-disk" type="number">
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="control-label  " for="x-image-meta-min-ram">Minimum RAM (MB)</label>
+                <span class="help-icon" data-toggle="tooltip" data-placement="top" title="El tamaño mínimo de disco necesario para arrancar la imagen. Si no se especifica este valor se asume 0 (sin mínimo)."><span class="glyphicon glyphicon-question-sign"></span></span>
+                <div class=" ">
+                  <input class="form-control" id="x-image-meta-min-ram" min="0" name="x-image-meta-min-ram" type="number">
+                </div>
+              </div>
+              <div class="form-group ">
+                <div class="">
+                  <div class="checkbox">
+                    <label>
+                      <input id="x-image-meta-is_public" name="x-image-meta-is_public" type="checkbox">
+                      <span>Public</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group ">
+                <div class="">
+                  <div class="checkbox">
+                    <label>
+                      <input id="x-image-meta-protected" name="x-image-meta-protected" type="checkbox">
+                      <span>Protected</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="create-image" class="btn btn-primary pull-right" style="margin-left: 10px">Create Image</button>
+          <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
