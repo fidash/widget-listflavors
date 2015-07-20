@@ -32,6 +32,7 @@ describe('List Flavor', function () {
         MashupPlatform.reset();
         jasmine.resetAll(JSTACK.Keystone);
         jasmine.resetAll(JSTACK.Nova);
+        $('.FixedHeader_Cloned.fixedHeader.FixedHeader_Header > table').empty();
 
     });
 
@@ -153,19 +154,6 @@ describe('List Flavor', function () {
         expect('click').toHaveBeenTriggeredOn('#create-flavor');
         expect(MashupPlatform.http.makeRequest).toHaveBeenCalledWith('https://cloud.lab.fiware.org/Spain2/flavor/v1/flavors', jasmine.any(Object));
 
-    });
-
-    it('should call JSTACK.Nova.createserver with the given arguments when click event is triggered on a launch button', function () {
-
-        var spyEvent;
-
-        callListFlavor();
-        callListFlavorSuccessCallback(respFlavorList);
-        spyEvent = spyOnEvent('tbody > tr > td > button', 'click');
-        $('tbody > tr > td > button').trigger('click');
-
-        expect(JSTACK.Nova.createserver).toHaveBeenCalled();
-        expect(spyEvent).toHaveBeenTriggered();
     });
 
     it('should show an error alert with the message' + 

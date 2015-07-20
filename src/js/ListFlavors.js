@@ -42,12 +42,7 @@ var ListFlavors = (function (JSTACK) {
 
         $.each(form.serializeArray(), function(i, field) {
             if (field.value !== "") {
-                if (field.name === "flavor" && field.value === "file" && $('#x-flavor-meta-file').val() !== "") {
-                    fields['x-flavor-meta-size'] = $('#x-flavor-meta-file')[0].files[0].size;
-                }
-                else {
-                    fields[field.name] = field.value;
-                }
+                fields[field.name] = field.value;
             }
         });
 

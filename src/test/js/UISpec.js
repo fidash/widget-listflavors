@@ -9,108 +9,17 @@ describe('User Interface', function () {
     var flavorListSingleFlavor = null;
     var drawCallbacks;
 	var prefsValues;
-	var units = [
-        {
-            "unit": "B",
-            "bytes": 1,
-            "expected": "1 B"
-        },
-        {
-            "unit": "kiB",
-            "bytes": 1024,
-            "expected": "1.00 kiB"
-        },
-        {
-            "unit": "kiB",
-            "bytes": 135821,
-            "expected": "132.64 kiB"
-        },
-        {
-            "unit": "MiB",
-            "bytes": 1048576,
-            "expected": "1.00 MiB"
-        },
-        {
-            "unit": "MiB",
-            "bytes": 12358468,
-            "expected": "11.79 MiB"
-        },
-        {
-            "unit": "GiB",
-            "bytes": 1073741824,
-            "expected": "1.00 GiB"
-        },
-        {
-            "unit": "GiB",
-            "bytes": 4532282751,
-            "expected": "4.22 GiB"
-        },
-        {
-            "unit": "TiB",
-            "bytes": 1.099511628e12,
-            "expected": "1.00 TiB"
-        },
-        {
-            "unit": "TiB",
-            "bytes": 5423864125103,
-            "expected": "4.93 TiB"
-        },
-        {
-            "unit": "PiB",
-            "bytes": 1.125899907e15,
-            "expected": "1.00 PiB"
-        },
-        {
-            "unit": "PiB",
-            "bytes": 1452687412365789,
-            "expected": "1.29 PiB"
-        },
-        {
-            "unit": "EiB",
-            "bytes": 1.152921505e18,
-            "expected": "1.00 EiB"
-        },
-        {
-            "unit": "EiB",
-            "bytes": 4125369753962148752,
-            "expected": "3.58 EiB"
-        },
-        {
-            "unit": "ZiB",
-            "bytes": 1.180591621e21,
-            "expected": "1.00 ZiB"
-        },
-        {
-            "unit": "ZiB",
-            "bytes": 4756123651742368426957,
-            "expected": "4.03 ZiB"
-        },
-        {
-            "unit": "YiB",
-            "bytes": 1.20892582e24,
-            "expected": "1.00 YiB"
-        },
-        {
-            "unit": "YiB",
-            "bytes": 5123698741236987412369874,
-            "expected": "4.24 YiB"
-        }
-    ];
 
     beforeEach(function () {
     	// Set preferences values
         prefsValues = {
             "MashupPlatform.prefs.get": {
-                "id": true,
+                "id": false,
                 "name": true,
-                "status": true,
-                "visibility": false,
-                "checksum": false,
-                "created": false,
-                "updated": true,
-                "size": false,
-                "container_format": false,
-                "disk_format": false,
+                "ram": true,
+                "vcpus": true,
+                "disk": true,
+                "swap": true
             }
         };
 
@@ -123,6 +32,9 @@ describe('User Interface', function () {
         respFlavorList = getJSONFixture('respFlavorList.json');
         respAuthenticate = getJSONFixture('respAuthenticate.json');
         flavorListSingleFlavor = getJSONFixture('flavorListSingleFlavor.json');
+
+        respAuthenticate.token.serviceCatalog = respAuthenticate.token.catalog;
+        JSTACK.Keystone.params.access = respAuthenticate.token;
 
         // Callbacks spies
         drawCallbacks = jasmine.createSpyObj('drawCallbacks', ['refresh', 'create']);
@@ -142,37 +54,16 @@ describe('User Interface', function () {
     /*                     I N T E R F A C E   T E S T S                      */
     /**************************************************************************/
 
-    units.forEach(function (unit) {
-        it('should display flavor size in ' + unit.unit + ' correctly', function () {
-            
-            var flavorData = flavorListSingleFlavor.flavors[0];
-            
-            // Change size value temporarily
-            var sizeCopy = flavorData.size;
-            flavorData.size = unit.bytes;
-            prefsValues["MashupPlatform.prefs.get"].size = true;
-
-			UI.updateHiddenColumns();
-			UI.drawFlavors(drawCallbacks, false, flavorListSingleFlavor.flavors);
-
-            expect($('tbody > tr > td')[4]).toContainText(unit.expected);
-
-            // Restore size value
-            prefsValues["MashupPlatform.prefs.get"].size = false;
-            flavorData.size = sizeCopy;
-        });
-    });
-
     it('should make the columns given in the preferences visible', function () {
 
         var columns;
         var expectedColumns = [
-            'ID',
             'Name',
-            'Status',
-            'Updated',
-            'Region',
-            'Actions'
+            'Ram',
+            'VCPUs',
+            'Disk',
+            'Swap',
+            'Region'
         ];
 
         UI.drawFlavors(drawCallbacks, false, flavorListSingleFlavor.flavors);
@@ -190,23 +81,20 @@ describe('User Interface', function () {
 
         var columns, handlePreferences;
         var expectedColumns = [
-            'Created',
-            'Size',
-            'Container format',
-            'Disk format',
-            'Region',
-            'Actions'
+            'ID',
+            'Ram',
+            'VCPUs',
+            'Swap',
+            'Region'
         ];
 
         // Change preferences
-        prefsValues["MashupPlatform.prefs.get"].id = false;
+        prefsValues["MashupPlatform.prefs.get"].id = true;
         prefsValues["MashupPlatform.prefs.get"].name = false;
-        prefsValues["MashupPlatform.prefs.get"].status = false;
-        prefsValues["MashupPlatform.prefs.get"].updated = false;
-        prefsValues["MashupPlatform.prefs.get"].created = true;
-        prefsValues["MashupPlatform.prefs.get"].size = true;
-        prefsValues["MashupPlatform.prefs.get"].container_format = true;
-        prefsValues["MashupPlatform.prefs.get"].disk_format = true;
+        prefsValues["MashupPlatform.prefs.get"].ram = true;
+        prefsValues["MashupPlatform.prefs.get"].vcpus = true;
+        prefsValues["MashupPlatform.prefs.get"].disk = false;
+        prefsValues["MashupPlatform.prefs.get"].swap = true;
 
         UI.updateHiddenColumns();
         UI.drawFlavors(drawCallbacks, false, respFlavorList.flavors);
@@ -242,27 +130,20 @@ describe('User Interface', function () {
 
         prefsValues["MashupPlatform.prefs.get"].id = true;
         prefsValues["MashupPlatform.prefs.get"].name = true;
-        prefsValues["MashupPlatform.prefs.get"].status = true;
-        prefsValues["MashupPlatform.prefs.get"].visibility = true;
-        prefsValues["MashupPlatform.prefs.get"].checksum = true;
-        prefsValues["MashupPlatform.prefs.get"].updated = true;
-        prefsValues["MashupPlatform.prefs.get"].created = true;
-        prefsValues["MashupPlatform.prefs.get"].size = true;
-        prefsValues["MashupPlatform.prefs.get"].container_format = true;
-        prefsValues["MashupPlatform.prefs.get"].disk_format = true;
+        prefsValues["MashupPlatform.prefs.get"].ram = true;
+        prefsValues["MashupPlatform.prefs.get"].disk = true;
+        prefsValues["MashupPlatform.prefs.get"].swap = true;
+        prefsValues["MashupPlatform.prefs.get"].vcpus = true;
 
         var flavor = flavorListSingleFlavor.flavors[0];
         var expectedTextList = [
             flavor.id,
             flavor.name,
-            flavor.status,
-            'Public',
-            flavor.checksum,
-            flavor.created_at,
-            flavor.updated_at,
-            parseFloat(flavor.size/1024/1024/1024).toFixed(2) + " GiB",
-            flavor.container_format,
-            flavor.disk_format
+            flavor.ram,
+            flavor.vcpus,
+            flavor.disk,
+            flavor.swap,
+            flavor.region
         ];
         var cell;
 

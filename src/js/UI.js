@@ -161,15 +161,15 @@ var UI = (function () {
 
         flavorList.forEach(function (flavor) {
 
-            flavor.is_public = flavor.is_public ? 'Public' : 'Private';
+            // flavor.is_public = flavor.is_public ? 'Public' : 'Private';
 
             row = dataTable.api().row.add([
                 flavor.id,
                 flavor.name,
-                flavor.ram,
-                flavor.disk,
+                flavor.ram.toString() + " MB",
                 flavor.vcpus,
-                flavor.swap,
+                flavor.disk.toString() + " GB",
+                flavor.swap.toString() + " MB",
                 flavor.region
             ])
             .draw()
@@ -267,8 +267,8 @@ var UI = (function () {
             'id',
             'name',
             'ram',
-            'disk',
             'vcpus',
+            'disk',
             'swap'
         ];
 

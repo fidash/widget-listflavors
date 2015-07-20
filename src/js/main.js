@@ -1,10 +1,10 @@
-/* global ListImages */
+/* global ListFlavors */
 
 $(document).ready(function() {
     "use strict";
 
-	var listImages = new ListImages();
+	var listFlavors = new ListFlavors();
 
-    listImages.init();
-    listImages.authenticate();
+    listFlavors.init();
+    listFlavors.authenticate();
 });

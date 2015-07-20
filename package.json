@@ -1,7 +1,7 @@
 {
   "name": "OpenStack-ListFlavor",
   "homepage": "https://repo.conwet.fi.upm.es/wirecloud/openstack-listflavors-widget",
-  "version": "0.5.1",
+  "version": "0.0.1",
   "vendor": "CoNWeT",
   "author": "CoNWeT Lab., Universidad Politecnica de Madrid",
   "description": "A widget showing a list of current flavors available for a user of an openstack instance.",

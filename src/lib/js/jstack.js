@@ -997,7 +997,7 @@ JSTACK.Nova = (function (JS, undefined) {
             var service = JS.Keystone.getservice(params.service);
             if (service) {
                 //params.url = JSTACK.Comm.getEndpoint(service, region, params.endpointType);
-                params.url = "https://cloud.lab.fiware.org/" + region + "/image/v1";
+                params.url = "https://cloud.lab.fiware.org/" + region + "/compute/v2/" + JS.Keystone.params.access.project.id;
                 return true;
             }
             return false;            

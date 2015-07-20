@@ -6,37 +6,6 @@ var Utils = (function () {
     /*                 P U B L I C   F U N C T I O N S                */
     /******************************************************************/
 
-    function getDisplayableSize (size) {
-        
-        var unitChangeLimit = 1024;
-        var units = [
-            "B",
-            "kiB",
-            "MiB",
-            "GiB",
-            "TiB",
-            "PiB",
-            "EiB",
-            "ZiB",
-            "YiB",
-        ];
-        size = parseFloat(size);
-        var displayableSize = size;
-        var unit = 0;
-
-        if (size < unitChangeLimit) {
-            return size + ' ' + units[0];
-        }
-
-        while (parseFloat(displayableSize/unitChangeLimit) >= parseFloat(1) && unit < 9) {
-            displayableSize /= unitChangeLimit;
-            unit += 1;
-        }
-
-        return displayableSize.toFixed(2) + ' ' + units[unit];
-    
-    }
-
     function createAlert (type, title, message, region, details) {
 
         // TODO buffer previous alerts and shown them on a list
@@ -86,7 +55,6 @@ var Utils = (function () {
     }
 
     return {
-        getDisplayableSize: getDisplayableSize,
         createAlert: createAlert
     };
 })();

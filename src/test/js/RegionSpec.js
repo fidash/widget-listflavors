@@ -32,6 +32,7 @@ describe('Region Module', function () {
 
         $('input').prop('checked', false);
         jasmine.resetAll(JSTACK.Keystone);
+        $('.FixedHeader_Cloned.fixedHeader.FixedHeader_Header > table').empty();
 
     });
 
