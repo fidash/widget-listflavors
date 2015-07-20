@@ -147,7 +147,7 @@ var UI = (function () {
 
     function buildTableBody (flavorList) {
 
-        var row, flavor;
+        var row, flavor, displayableRam, displayableDisk, displayableSwap;
 
         // Launch button
         var wrapper = $('<div>');
@@ -162,14 +162,17 @@ var UI = (function () {
         flavorList.forEach(function (flavor) {
 
             // flavor.is_public = flavor.is_public ? 'Public' : 'Private';
+            displayableRam = flavor.ram.toString() !== "" ? flavor.ram.toString() + " MB" : "0 MB";
+            displayableDisk = flavor.disk.toString() !== "" ? flavor.disk.toString() + " GB" : "0 GB";
+            displayableSwap = flavor.swap.toString() !== "" ? flavor.swap.toString() + " MB" : "0 MB";
 
             row = dataTable.api().row.add([
                 flavor.id,
                 flavor.name,
-                flavor.ram.toString() + " MB",
+                displayableRam,
                 flavor.vcpus,
-                flavor.disk.toString() + " GB",
-                flavor.swap.toString() + " MB",
+                displayableDisk,
+                displayableSwap,
                 flavor.region
             ])
             .draw()
