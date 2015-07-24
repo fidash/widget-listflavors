@@ -124,7 +124,9 @@ var UI = (function () {
         });
 
         regions.forEach(function(region) {
+            
             var checked = false;
+            
             $('<div>')
                 .html('<input type="checkbox" name="region" value="' + region + '" /> ' + region)
                 .addClass('region-container')
@@ -217,21 +219,25 @@ var UI = (function () {
         
     }
 
-    function initFileChooserEvents () {
-        $('input[name=flavor]').change(function () {
-            if ($(this).val() === "file") {
-                $('#x-flavor-meta-file').prop('disabled', false);
-                $('#x-flavor-meta-location')
-                    .prop('disabled', true)
-                    .val('');
-            }
-            else {
-                $('#x-flavor-meta-file')
-                    .prop('disabled', true)
-                    .val('');
-                $('#x-flavor-meta-location').prop('disabled', false);
-            }
+    function createFormRegionSelector () {
+        
+        var availableRegions = Region.getAvailableRegions();
+        var currentRegions = Region.getCurrentRegions();
+        var regionFormSelector = $('#region');
+
+        availableRegions.forEach(function (region) {
+            $('<option>')
+                .val(region)
+                .text(region)
+                .appendTo(regionFormSelector);
         });
+
+        if (currentRegions.length === 1) {
+            $('option[value=' + currentRegions[0] + ']').prop('selected', true);
+        }
+
+    }
+    
     }
 
 
@@ -250,7 +256,7 @@ var UI = (function () {
         $('#flavors_table_paginate').addClass('pagination pull-right');
 
         createRegionSelector();
-        initFileChooserEvents();
+        createFormRegionSelector();
         createRegionsButton($('#flavors_table_paginate'));
         createModalButton($('#flavors_table_paginate'));
         createSearchField($('#flavors_table_paginate'));

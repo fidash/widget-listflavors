@@ -26,104 +26,39 @@
             <h3>Create a flavor</h3>
           </div>
           <form id="create_flavor_form" name="" autocomplete="" enctype="multipart/form-data">
-            <div class="modal-body clearfix">       
+            <div class="modal-body clearfix">
               <div class="pull-left col-xs-6">
                 <fieldset>
                   <div class="form-group required">
-                    <label class="control-label  required" for="x-flavor-meta-name">Name</label>
-                    <div class=" ">
-                      <input class="form-control" id="x-flavor-meta-name" maxlength="255" name="x-flavor-meta-name" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group ">
-                    <label class="control-label  " for="x-flavor-meta-file">Flavor File</label>
-                    <span class="help-icon" data-toggle="tooltip" data-placement="top" title="A local file uploaded as an flavor."><span class="glyphicon glyphicon-question-sign"></span></span>
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="radio" name="flavor" value="file" checked="checked" />
-                      </span>
-                      <input type="file" class="form-control" id="x-flavor-meta-file" name="x-flavor-meta-file" />
-                    </div>
-                  </div>
-                  <div class="form-group ">
-                    <label class="control-label  " for="x-flavor-meta-location">Flavor URL</label>
-                    <span class="help-icon" data-toggle="tooltip" data-placement="top" title="Una (HTTP) URL externa desde la que cargar la flavorn."><span class="glyphicon glyphicon-question-sign"></span></span>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                          <input type="radio" name="flavor" value="location" />
-                        </span>
-                        <input class="form-control" id="x-flavor-meta-location" maxlength="255" name="x-flavor-meta-location" type="text" placeholder="http://example.com/flavor.iso" disabled="disabled" />
-                        
-                    </div>
+                    <label class="control-label  required" for="name">Name</label>
+                    <input class="form-control" id="name" maxlength="255" name="name" type="text">
                   </div>
                   <div class="form-group required">
-                    <label class="control-label  required" for="x-flavor-meta-disk-format">Disk Format</label>
-                    <div class=" ">
-                      <select class="form-control switchable" id="x-flavor-meta-disk-format" name="x-flavor-meta-disk-format">
-                        <option value="" selected="selected">Select format</option>
-                        <option value="aki">AKI - Amazon Kernel Flavor</option>
-                        <option value="ami">AMI - Amazon Machine Flavor</option>
-                        <option value="ari">ARI - Amazon Ramdisk Flavor</option>
-                        <option value="iso">ISO - Flavorn de disco óptico</option>
-                        <option value="qcow2">QCOW2 - Emulador QEMU</option>
-                        <option value="raw">Fila</option>
-                        <option value="vdi">VDI</option>
-                        <option value="vhd">VHD</option>
-                        <option value="vmdk">VMDK</option>
-                      </select>
-                    </div>
+                    <label class="control-label  required" for="id">ID</label>
+                    <input class="form-control" id="id" maxlength="255" name="id" type="text">
                   </div>
-                  <div class="form-group required">
-                    <label class="control-label  required" for="x-flavor-meta-container-format">Container Format</label>
-                    <div class=" ">
-                      <select class="form-control switchable" id="x-flavor-meta-container-format" name="x-flavor-meta-container-format">
-                        <option value="" selected="selected">Select format</option>
-                        <option value="ovf">OVF - Container format</option>
-                        <option value="bare"> Bare - No container envelope for the flavor</option>
-                        <option value="aki">AKI - Amazon Kernel Flavor</option>
-                        <option value="ari">ARI - Amazon Ramdisk Flavor</option>
-                        <option value="ami">AMI - Amazon Machine Flavor</option>
-                      </select>
-                    </div>
+                  <div class="form-group ">
+                    <label class="control-label" for="vcpus">VCPUs</label>
+                    <input type="number" min="0" class="form-control" id="vcpus" name="vcpus" />
                   </div>
                 </fieldset>
               </div>
               <div class="pull-right col-xs-6">
                 <fieldset>
                   <div class="form-group ">
-                    <label class="control-label  " for="x-flavor-meta-min-disk">Minimum Disk (GB)</label>
-                    <span class="help-icon" data-toggle="tooltip" data-placement="top" title="El tamaño mínimo de disco necesario para arrancar la flavorn. Si no se especifica este valor se asume 0 (sin mínimo)."><span class="glyphicon glyphicon-question-sign"></span></span>
+                    <label class="control-label  " for="ram">RAM (MB)</label>
+                    <input class="form-control" id="ram" name="ram" type="number" min="0" />
+                  </div>
+                  <div class="form-group ">
+                    <label class="control-label  " for="disk">Disk (GB)</label>
+                    <input class="form-control" id="disk" name="disk" type="number" min="0" /> 
+                  </div>
+                  <div class="form-group ">
+                    <label class="control-label  " for="region">Region</label>
                     <div class=" ">
-                      <input class="form-control" id="x-flavor-meta-min-disk" min="0" name="x-flavor-meta-min-disk" type="number">
+                      <select class="form-control" id="region" name="region"></select>
                     </div>
-                  </div>
-                  <div class="form-group ">
-                    <label class="control-label  " for="x-flavor-meta-min-ram">Minimum RAM (MB)</label>
-                    <span class="help-icon" data-toggle="tooltip" data-placement="top" title="El tamaño mínimo de disco necesario para arrancar la flavorn. Si no se especifica este valor se asume 0 (sin mínimo)."><span class="glyphicon glyphicon-question-sign"></span></span>
-                    <div class=" ">
-                      <input class="form-control" id="x-flavor-meta-min-ram" min="0" name="x-flavor-meta-min-ram" type="number">
-                    </div>
-                  </div>
-                  <div class="form-group ">
-                    <div class="">
-                      <div class="checkbox">
-                        <label>
-                          <input id="x-flavor-meta-is_public" name="x-flavor-meta-is_public" type="checkbox">
-                          <span>Public</span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group ">
-                    <div class="">
-                      <div class="checkbox">
-                        <label>
-                          <input id="x-flavor-meta-protected" name="x-flavor-meta-protected" type="checkbox">
-                          <span>Protected</span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
+                </div>
                 </fieldset>
               </div>
             </div>

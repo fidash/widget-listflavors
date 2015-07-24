@@ -199,30 +199,6 @@ describe('User Interface', function () {
         expect($('tbody').children().size()).toBe(1);
     });
 
-    it('should disable and reset the file or location field in the create flavor form when the other is selected', function () {
-
-        var file = $('#x-flavor-meta-file');
-        var location = $('#x-flavor-meta-location');
-
-        $('input[name=flavor][value=location]')
-            .attr('checked', 'checked')
-            .change();
-
-        expect(file).toBeDisabled();
-        expect(file).toHaveValue('');
-        expect(location).not.toBeDisabled();
-
-        location.val('Something else');
-        $('input[name=flavor][value=file]')
-            .attr('checked', 'checked')
-            .change();
-
-        expect(file).not.toBeDisabled();
-        expect(location).toBeDisabled();
-        expect(location).toHaveValue('');
-
-    });
-
     it('should expand the search bar', function () {
         var searchButton = $('.search-container button');
         var spyEvent = spyOnEvent('.search-container button', 'click');

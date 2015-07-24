@@ -143,16 +143,24 @@ describe('List Flavor', function () {
     it('should call createFlavor function when click event is triggered on the create flavor button', function () {
 
         var createButton = $("#create-flavor");
-        var spyEvent;
+        var spyEvent, region;
+
+        var id = $("#id").val("123").val();
+        var name = $("#name").val("123").val();
+        var ram = $("#ram").val("123").val();
+        var vcpus = $("#vcpus").val("123").val();
+        var disk = $("#disk").val("123").val();
 
         callListFlavor();
         callListFlavorSuccessCallback(respFlavorList);
-        $('#x-flavor-meta-name').val("FlavorName");
+
+        region = $('#id_region').find(":selected").val();
+        
         spyEvent = spyOnEvent(createButton, 'click');
         createButton.trigger('click');
 
         expect('click').toHaveBeenTriggeredOn('#create-flavor');
-        expect(MashupPlatform.http.makeRequest).toHaveBeenCalledWith('https://cloud.lab.fiware.org/Spain2/flavor/v1/flavors', jasmine.any(Object));
+        expect(JSTACK.Nova.createflavor).toHaveBeenCalledWith(name, ram, vcpus, disk, id, jasmine.any(Function), jasmine.any(Function), region);
 
     });
 

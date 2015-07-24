@@ -36,7 +36,7 @@ var ListFlavors = (function (JSTACK) {
 
     }
 
-    function readCreateFlavorForm (form) {
+    function readFormFields (form) {
 
         var fields = {};
 
@@ -193,26 +193,20 @@ var ListFlavors = (function (JSTACK) {
 
         var token = JSTACK.Keystone.params.token;
         var form = $('#create_flavor_form');
-        var headers = readCreateFlavorForm(form);
-        headers['X-Auth-Token'] = token;
-        var content = $('input[type=radio][name=flavor]').val() == 'file' ? "application/octet-stream" : "application/json";
-        var file = $('#x-flavor-meta-file').val() !== "" ? $('#x-flavor-meta-file')[0].files[0] : "";
-        var glanceURL = "";
+        var fields = readFormFields(form);
 
-        var regions =  Region.getCurrentRegions();
+        var region = $('#region').find(":selected").val();
 
-        regions.forEach(function (region) {
-            glanceURL = "https://cloud.lab.fiware.org/" + region + "/flavor/v1/flavors";
-
-            // Call OpenStack API
-            MashupPlatform.http.makeRequest(glanceURL, {
-                requestHeaders: headers,
-                contentType: content,
-                postBody: file,
-                onSuccess: getFlavorList,
-                onFailure: onError
-            });
-        });
+        JSTACK.Nova.createflavor(
+            fields.name,
+            fields.ram,
+            fields.vcpus,
+            fields.disk,
+            fields.id,
+            getFlavorList,
+            onError,
+            region
+        );
 
         // Reset form, prevent submit and close modal
         form[0].reset();
