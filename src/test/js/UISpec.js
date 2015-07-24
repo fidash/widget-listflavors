@@ -40,7 +40,7 @@ describe('User Interface', function () {
         drawCallbacks = jasmine.createSpyObj('drawCallbacks', ['refresh', 'create']);
 
         // Draw default columns
-        UI.createTable(drawCallbacks.refresh, drawCallbacks.create);
+        UI.createTable(drawCallbacks);
         UI.updateHiddenColumns();
     });
 
@@ -63,7 +63,8 @@ describe('User Interface', function () {
             'VCPUs',
             'Disk',
             'Swap',
-            'Region'
+            'Region',
+            'Actions'
         ];
 
         UI.drawFlavors(drawCallbacks, false, flavorListSingleFlavor.flavors);
@@ -85,7 +86,8 @@ describe('User Interface', function () {
             'Ram',
             'VCPUs',
             'Swap',
-            'Region'
+            'Region',
+            'Actions'
         ];
 
         // Change preferences

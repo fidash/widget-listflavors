@@ -29,7 +29,8 @@ var UI = (function () {
             {'title': 'VCPUs'},
             {'title': 'Disk'},
             {'title': 'Swap'},
-            {'title': 'Region'}
+            {'title': 'Region'},
+            {'title': 'Actions'}
         ];
 
         dataTable = $('#flavors_table').dataTable({
@@ -147,16 +148,14 @@ var UI = (function () {
         $('#region-selector').toggleClass('slideRight');
     }
 
-    function buildTableBody (flavorList) {
+    function buildTableBody (flavorList, updateCallback, deleteCallback) {
 
         var row, flavor, displayableRam, displayableDisk, displayableSwap;
 
         // Launch button
         var wrapper = $('<div>');
-        var launchButton = $('<button>')
-            .addClass('btn btn-primary')
-            .text('Launch')
-            .appendTo(wrapper);
+        getEditButtonHTML(wrapper, updateCallback);
+        getDeleteButtonHTML(wrapper, deleteCallback);
 
         // Clear previous elements
         dataTable.api().clear();
@@ -175,7 +174,8 @@ var UI = (function () {
                 flavor.vcpus,
                 displayableDisk,
                 displayableSwap,
-                flavor.region
+                flavor.region,
+                wrapper.html()
             ])
             .draw()
             .nodes()
@@ -237,6 +237,29 @@ var UI = (function () {
         }
 
     }
+
+    function getEditButtonHTML (parent) {
+    
+        $('<button>')
+            .addClass('btn btn-primary')
+            .html('<i class="fa fa-pencil-square-o"></i>')
+            .attr('data-toggle', 'modal')
+            .attr('data-target', '#updateFlavorModal')
+            .appendTo(parent);
+    
+    }
+
+    function getDeleteButtonHTML (parent, callback) {
+        
+        $('<button>')
+            .addClass('btn btn-danger')
+            .html('<i class="fa fa-trash"></i>')
+            .on('click', function () {
+                var row = $(this).parent().parent();
+                var data = dataTable.api().row(row).data();
+                callback(data[0], data[data.length - 2]);
+            })
+            .appendTo(parent);
     
     }
 
@@ -245,7 +268,7 @@ var UI = (function () {
     /*                 P U B L I C   F U N C T I O N S                */
     /******************************************************************/
 
-    function createTable (refreshCallback, modalSubmitCallback) {
+    function createTable (callbacks) {
 
         initDataTable();
 
@@ -260,10 +283,11 @@ var UI = (function () {
         createRegionsButton($('#flavors_table_paginate'));
         createModalButton($('#flavors_table_paginate'));
         createSearchField($('#flavors_table_paginate'));
-        createRefreshButton($('#flavors_table_paginate'), refreshCallback);
+        createRefreshButton($('#flavors_table_paginate'), callbacks.refresh);
 
         // Set modal create flavor button click
-        $('#create-flavor').on('click', modalSubmitCallback);
+        $('#create-flavor').on('click', callbacks.create);
+        $('#update-flavor').on('click', callbacks.update);
 
         initFixedHeader();
         
@@ -310,7 +334,7 @@ var UI = (function () {
         var scroll = $(window).scrollTop();
         var page = dataTable.api().page();
 
-        buildTableBody(flavorList);
+        buildTableBody(flavorList, callbacks.update, callbacks.destroy);
         setSelectFlavorEvents();
 
         // Restore previous scroll and page
@@ -319,7 +343,7 @@ var UI = (function () {
 
         if (autoRefresh) {
             setTimeout(function () {
-                callbacks.getFlavorList(true);
+                callbacks.refresh(true);
             }, 4000);
         }
     }

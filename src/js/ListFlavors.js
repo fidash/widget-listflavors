@@ -22,6 +22,8 @@ var ListFlavors = (function (JSTACK) {
         this.authenticate = authenticate;
         this.listFlavor = getFlavorList;
         this.createFlavor = createFlavor;
+        this.editFlavor = editFlavor;
+        this.deleteFlavor = deleteFlavor;
 
     }
 
@@ -50,6 +52,12 @@ var ListFlavors = (function (JSTACK) {
     }
 
     function createWidgetUI (tokenResponse) {
+
+        var callbacks = {
+            create: createFlavor,
+            refresh: getFlavorList,
+            update: editFlavor
+        };
         
         var token = tokenResponse.getHeader('x-subject-token');
         var responseBody = JSON.parse(tokenResponse.responseText);
@@ -63,7 +71,7 @@ var ListFlavors = (function (JSTACK) {
         JSTACK.Keystone.params.currentstate = 2;
 
         UI.stopLoadingAnimation($('.loading'));
-        UI.createTable(getFlavorList, createFlavor);
+        UI.createTable(callbacks);
         getFlavorList(true);
 
     }
@@ -98,7 +106,8 @@ var ListFlavors = (function (JSTACK) {
             if (regionsLimit === 0) {
 
                 var callbacks = {
-                    "getFlavorList": getFlavorList
+                    refresh: getFlavorList,
+                    destroy: deleteFlavor
                 };
 
                 UI.drawFlavors(callbacks, autoRefresh, currentFlavorList);
@@ -213,6 +222,31 @@ var ListFlavors = (function (JSTACK) {
         e.preventDefault();
         $('#uploadFlavorModal').modal('hide');
 
+    }
+
+    function editFlavor () {
+        
+        var flavor = readFormFields($('#update-form'));
+
+        JSTACK.Nova.deleteflavor(flavor.id, function () {
+            
+            JSTACK.Nova.createflavor(
+                flavor.name,
+                flavor.ram,
+                flavor.vcpus,
+                flavor.disk,
+                flavor.id,
+                getFlavorList,
+                onError,
+                flavor.region
+            );
+
+        }, onError, flavor.region);
+
+    }
+
+    function deleteFlavor (id, region) {
+        JSTACK.Nova.deleteflavor(id, getFlavorList, onError, region);
     }
 
     function getFlavorList (autoRefresh) {
