@@ -1,16 +1,16 @@
 {
   "name": "ListFlavors",
-  "homepage": "https://repo.conwet.fi.upm.es/wirecloud/openstack-listflavors-widget",
+  "homepage": "https://github.com/fidash/widget-listflavors",
   "version": "0.0.1",
   "vendor": "UPM-ETSIINF",
   "author": "CoNWeT Lab., Universidad Politecnica de Madrid",
   "description": "A widget showing a list of current flavors available for a user of an openstack instance.",
   "repository": {
     "type": "git",
-    "url": "https://repo.conwet.fi.upm.es/wirecloud/openstack-listimages-widget.git"
+    "url": "https://github.com/fidash/widget-listflavors"
   },
   "bugs": {
-    "url": "https://repo.conwet.fi.upm.es/wirecloud/openstack-listimages-widget/issues"
+    "url": "https://github.com/fidash/widget-listflavors/issues"
   },
   "keywords": [
     "wirecloud",
