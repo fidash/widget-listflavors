@@ -1,5 +1,5 @@
 {
-  "name": "OpenStack-ListFlavor",
+  "name": "ListFlavors",
   "homepage": "https://repo.conwet.fi.upm.es/wirecloud/openstack-listflavors-widget",
   "version": "0.0.1",
   "vendor": "CoNWeT",
