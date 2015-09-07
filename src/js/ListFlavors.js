@@ -6,7 +6,8 @@ var ListFlavors = (function (JSTACK) {
     var ERRORS = {
         '500 Error': 'An error has occurred in FIWARE\'s Cloud.',
         '503 Error': 'FIWARE\'s Cloud service is not available at the moment.',
-        '422 Error': 'You are not authenticated in the wirecloud platform.'
+        '422 Error': 'You are not authenticated in the wirecloud platform.',
+        '403 Error': 'You are not allowed to use, edit or create this resource.'
     };
 
     var authURL = 'https://cloud.lab.fiware.org/keystone/v3/auth/';
