@@ -10,16 +10,6 @@ var UI = (function () {
     /*                P R I V A T E   F U N C T I O N S               */
     /******************************************************************/
 
-    function selectFlavor (id, region) {
-        var data = {
-            'id': id,
-            'access': JSTACK.Keystone.params.access,
-            'token': JSTACK.Keystone.params.token,
-            'region': region
-        };
-        MashupPlatform.wiring.pushEvent('flavor_id', JSON.stringify(data));
-    }
-
     function initDataTable () {
 
         var columns = [
@@ -228,7 +218,6 @@ var UI = (function () {
                 .to$()
                 .removeClass('selected');
             $(this).addClass('selected');
-            selectFlavor(id, region);
         });
     }
 

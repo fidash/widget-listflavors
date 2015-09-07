@@ -108,26 +108,6 @@ describe('User Interface', function () {
         }
     });
 
-	it('should call MashupPlatform.wiring.pushEvent when click event triggered on a row', function () {
-
-        var spyEvent = spyOnEvent('tbody > tr', 'click');
-        var flavorId;
-
-        UI.drawFlavors(drawCallbacks, false, respFlavorList.flavors);
-        
-        $('tbody > tr').trigger('click');
-
-        for (var i=0; i<respFlavorList.flavors.length; i++) {
-
-            if (respFlavorList.flavors[i].id === JSON.parse(MashupPlatform.wiring.pushEvent.calls.mostRecent().args[1]).id) {
-                flavorId = respFlavorList.flavors[i].id;
-            }
-        }
-
-        expect(MashupPlatform.wiring.pushEvent).toHaveBeenCalled();
-        expect(flavorId).toBeDefined();
-    });
-
     it('should add the given row', function() {
 
         prefsValues["MashupPlatform.prefs.get"].id = true;
