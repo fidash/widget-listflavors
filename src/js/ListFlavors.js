@@ -224,9 +224,7 @@ var ListFlavors = (function (JSTACK) {
 
     }
 
-    function editFlavor () {
-        
-        var flavor = readFormFields($('#update-form'));
+    function editFlavor (flavor) {
 
         JSTACK.Nova.deleteflavor(flavor.id, function () {
             
@@ -236,6 +234,9 @@ var ListFlavors = (function (JSTACK) {
                 flavor.vcpus,
                 flavor.disk,
                 flavor.id,
+                undefined,
+                undefined,
+                undefined,
                 getFlavorList,
                 onError,
                 flavor.region

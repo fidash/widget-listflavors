@@ -154,8 +154,8 @@ var UI = (function () {
 
         // Launch button
         var wrapper = $('<div>');
-        getEditButtonHTML(wrapper, updateCallback);
-        getDeleteButtonHTML(wrapper, deleteCallback);
+        getEditButtonHTML(wrapper);
+        getDeleteButtonHTML(wrapper);
 
         // Clear previous elements
         dataTable.api().clear();
@@ -184,7 +184,31 @@ var UI = (function () {
             if (UI.selectedRowId && flavor.id === UI.selectedRowId) {
                 row.addClass('selected');
             }
+
+            setDeleteButtonEvent(deleteCallback);
+            setEditEvents(flavor, updateCallback);
+            
         });
+    }
+
+    function setEditEvents (flavor, callback) {
+
+        $('button[name=edit-button]').on('click', function () {
+            var row = $(this).parent().parent();
+
+            fillEditForm(flavor);
+        });
+
+    }
+
+    function setDeleteButtonEvent (callback) {
+
+        $('button[name=delete-button]').on('click', function () {
+            var row = $(this).parent().parent();
+            var data = dataTable.api().row(row).data();
+            callback(data[0], data[data.length - 2]);
+        });
+
     }
 
     function setSelectFlavorEvents () {
@@ -242,6 +266,7 @@ var UI = (function () {
     
         $('<button>')
             .addClass('btn btn-primary')
+            .attr('name', 'edit-button')
             .html('<i class="fa fa-pencil-square-o"></i>')
             .attr('data-toggle', 'modal')
             .attr('data-target', '#updateFlavorModal')
@@ -249,18 +274,24 @@ var UI = (function () {
     
     }
 
-    function getDeleteButtonHTML (parent, callback) {
-        
+    function getDeleteButtonHTML (parent) {
+
         $('<button>')
             .addClass('btn btn-danger')
+            .attr('name', 'delete-button')
             .html('<i class="fa fa-trash"></i>')
-            .on('click', function () {
-                var row = $(this).parent().parent();
-                var data = dataTable.api().row(row).data();
-                callback(data[0], data[data.length - 2]);
-            })
             .appendTo(parent);
-    
+
+    }
+
+    function fillEditForm (flavor) {
+
+        $('#update-name').val(flavor.name);
+        $('#update-ram').val(flavor.ram);
+        $('#update-vcpus').val(flavor.vcpus);
+        $('#update-disk').val(flavor.disk);
+        $('#update-form-region').val(flavor.region);
+
     }
 
 
@@ -287,7 +318,18 @@ var UI = (function () {
 
         // Set modal create flavor button click
         $('#create-flavor').on('click', callbacks.create);
-        $('#update-flavor').on('click', callbacks.update);
+        $('#update-flavor').on('click', function (e) {
+            var form = $('#update_flavor_form')[0];
+            var flavor = {};
+            flavor.name = form['update-name'].value;
+            flavor.ram = form['update-ram'].value;
+            flavor.vcpus = form['update-vcpus'].value;
+            flavor.disk = form['update-disk'].value;
+            flavor.region = form['update-form-region'].value;
+            callbacks.update(flavor);
+            e.preventDefault();
+            $('#updateFlavorModal').modal('hide');
+        });
 
         initFixedHeader();
         

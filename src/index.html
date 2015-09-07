@@ -71,6 +71,50 @@
       </div>
     </div>
 
+    <div id="updateFlavorModal" class="modal fade" style="top: 0px; display: none;" aria-hidden="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="padding-top:0; padding-bottom: 0;">
+            <a href="#" class="close" data-dismiss="modal">×</a>
+            <h3>Edit flavor</h3>
+          </div>
+          <form id="update_flavor_form" name="" autocomplete="" enctype="multipart/form-data">
+            <div class="modal-body clearfix">
+              <div class="pull-left col-xs-6">
+                <fieldset>
+                  <div class="form-group required">
+                    <label class="control-label  required" for="update-name">Name</label>
+                    <input class="form-control" id="update-name" maxlength="255" name="update-name" type="text">
+                  </div>
+                  <div class="form-group ">
+                    <label class="control-label" for="update-vcpus">VCPUs</label>
+                    <input type="number" min="0" class="form-control" id="update-vcpus" name="update-vcpus" value="0" />
+                  </div>
+                </fieldset>
+              </div>
+              <div class="pull-right col-xs-6">
+                <fieldset>
+                  <div class="form-group ">
+                    <label class="control-label  " for="update-ram">RAM (MB)</label>
+                    <input class="form-control" id="update-ram" name="update-ram" type="number" min="0" value="0" />
+                  </div>
+                  <div class="form-group ">
+                    <label class="control-label  " for="update-disk">Disk (GB)</label>
+                    <input class="form-control" id="update-disk" name="update-disk" type="number" min="0" value="0" /> 
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <input type="hidden" name="update-form-region" id="update-form-region" />
+            <div class="modal-footer">
+              <button id="update-flavor" class="btn btn-primary pull-right" style="margin-left: 10px">Update</button>
+              <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
 
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/jquery.dataTables.min.js"></script>
