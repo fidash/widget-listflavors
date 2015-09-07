@@ -175,7 +175,6 @@ var UI = (function () {
                 row.addClass('selected');
             }
 
-            setDeleteButtonEvent(deleteCallback);
             setEditEvents(flavor, updateCallback);
             
         });
@@ -365,7 +364,8 @@ var UI = (function () {
         var scroll = $(window).scrollTop();
         var page = dataTable.api().page();
 
-        buildTableBody(flavorList, callbacks.update, callbacks.destroy);
+        buildTableBody(flavorList, callbacks.update);
+        setDeleteButtonEvent(callbacks.destroy);
         setSelectFlavorEvents();
 
         // Restore previous scroll and page
