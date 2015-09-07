@@ -212,6 +212,9 @@ var ListFlavors = (function (JSTACK) {
             fields.vcpus,
             fields.disk,
             fields.id,
+            undefined,
+            undefined,
+            undefined,
             getFlavorList,
             onError,
             region

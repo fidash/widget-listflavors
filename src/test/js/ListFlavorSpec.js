@@ -160,7 +160,7 @@ describe('List Flavor', function () {
         createButton.trigger('click');
 
         expect('click').toHaveBeenTriggeredOn('#create-flavor');
-        expect(JSTACK.Nova.createflavor).toHaveBeenCalledWith(name, ram, vcpus, disk, id, jasmine.any(Function), jasmine.any(Function), region);
+        expect(JSTACK.Nova.createflavor).toHaveBeenCalledWith(name, ram, vcpus, disk, id, undefined, undefined, undefined, jasmine.any(Function), jasmine.any(Function), region);
 
     });
 
