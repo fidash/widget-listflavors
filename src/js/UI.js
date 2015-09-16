@@ -132,6 +132,8 @@ var UI = (function () {
                 })
                 .appendTo(regionSelector);
         });
+
+        $("div>input[type=checkbox][value=Spain2]").prop("checked", true);
     }
 
     function toggleRegionSelector () {
