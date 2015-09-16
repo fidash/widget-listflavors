@@ -153,9 +153,9 @@ var UI = (function () {
         flavorList.forEach(function (flavor) {
 
             // flavor.is_public = flavor.is_public ? 'Public' : 'Private';
-            displayableRam = flavor.ram.toString() !== "" ? flavor.ram.toString() + " MB" : "0 MB";
-            displayableDisk = flavor.disk.toString() !== "" ? flavor.disk.toString() + " GB" : "0 GB";
-            displayableSwap = flavor.swap.toString() !== "" ? flavor.swap.toString() + " MB" : "0 MB";
+            displayableRam = flavor.ram.toString() !== "" ? flavor.ram.toString() + " MiB" : "0 MiB";
+            displayableDisk = flavor.disk.toString() !== "" ? flavor.disk.toString() + " GiB" : "0 GiB";
+            displayableSwap = flavor.swap.toString() !== "" ? flavor.swap.toString() + " MiB" : "0 MiB";
 
             row = dataTable.api().row.add([
                 flavor.id,
