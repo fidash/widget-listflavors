@@ -36,10 +36,6 @@ describe('Region Module', function () {
 
     });
 
-    xit('should return the platform region when there is one and there are no current regions', function () {
-
-    });
-
     it('should return Spain2 when there is no platform region and there are no current regions', function () {
         expect(Region.getCurrentRegions()).toEqual(["Spain2"]);
     });
@@ -62,7 +58,7 @@ describe('Region Module', function () {
     it('should leave the current region list empty after setting the regions with no one selected', function () {
         Region.setCurrentRegions(regionSelector);
 
-        expect(Region.getCurrentRegions()).toEqual(['Spain2']);
+        expect(Region.getCurrentRegions()).toEqual([]);
     });
 
 });

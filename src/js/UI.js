@@ -134,6 +134,7 @@ var UI = (function () {
         });
 
         $("div>input[type=checkbox][value=Spain2]").prop("checked", true);
+        Region.setCurrentRegions(regionSelector);
     }
 
     function toggleRegionSelector () {
@@ -398,9 +399,12 @@ var UI = (function () {
     }
 
     function stopLoadingAnimation (element) {
-
         element.addClass('hide');
+    }
 
+    function clearTable () {
+        dataTable.api().clear();
+        dataTable.api().draw();
     }
 
     return {
@@ -408,6 +412,7 @@ var UI = (function () {
         updateHiddenColumns: updateHiddenColumns,
         drawFlavors: drawFlavors,
         startLoadingAnimation: startLoadingAnimation,
-        stopLoadingAnimation: stopLoadingAnimation
+        stopLoadingAnimation: stopLoadingAnimation,
+        clearTable: clearTable
     };
 })();

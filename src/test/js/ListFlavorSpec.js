@@ -87,7 +87,6 @@ describe('List Flavor', function () {
     it('should authenticate through wirecloud proxy', function() {
 
         var stopLoadingAnimationSpy = spyOn(UI, 'stopLoadingAnimation');
-        var createTableSpy = spyOn(UI, 'createTable');
 
         callListFlavor();
 
