@@ -59,7 +59,7 @@ describe('User Interface', function () {
         var columns;
         var expectedColumns = [
             'Name',
-            'Ram',
+            'RAM',
             'VCPUs',
             'Disk',
             'Swap',
@@ -83,7 +83,7 @@ describe('User Interface', function () {
         var columns, handlePreferences;
         var expectedColumns = [
             'ID',
-            'Ram',
+            'RAM',
             'VCPUs',
             'Swap',
             'Region',

@@ -15,7 +15,7 @@ var UI = (function () {
         var columns = [
             {'title': 'ID'},
             {'title': 'Name'},
-            {'title': 'Ram'},
+            {'title': 'RAM'},
             {'title': 'VCPUs'},
             {'title': 'Disk'},
             {'title': 'Swap'},
