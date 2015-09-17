@@ -17,7 +17,7 @@
     <preference name="ram" type="boolean" description="Activate to display the ram column" label="Ram" default="true" />
     <preference name="vcpus" type="boolean" description="Activate to display the vcpus column" label="VCPUs" default="true" />
     <preference name="disk" type="boolean" description="Activate to display the disk column" label="Disk" default="true" />
-    <preference name="swap" type="boolean" description="Activate to display the swap column" label="Swap" default="true" />
+    <preference name="swap" type="boolean" description="Activate to display the swap column" label="Swap" default="false" />
   </preferences>
   <wiring>
   </wiring>
