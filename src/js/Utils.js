@@ -54,7 +54,18 @@ var Utils = (function () {
 
     }
 
+    function getDisplayableValue (value, unit) {
+
+        if (typeof value !== "number") {
+            return "N/A";
+        }
+
+        return  value.toString() + " " + unit; 
+
+    }
+
     return {
-        createAlert: createAlert
+        createAlert: createAlert,
+        getDisplayableValue: getDisplayableValue
     };
 })();

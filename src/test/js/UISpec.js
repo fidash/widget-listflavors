@@ -124,7 +124,7 @@ describe('User Interface', function () {
             flavor.ram,
             flavor.vcpus,
             flavor.disk,
-            flavor.swap,
+            "N/A",
             flavor.region
         ];
         var cell;

@@ -154,10 +154,9 @@ var UI = (function () {
 
         flavorList.forEach(function (flavor) {
 
-            // flavor.is_public = flavor.is_public ? 'Public' : 'Private';
-            displayableRam = flavor.ram.toString() !== "" ? flavor.ram.toString() + " MiB" : "0 MiB";
-            displayableDisk = flavor.disk.toString() !== "" ? flavor.disk.toString() + " GiB" : "0 GiB";
-            displayableSwap = flavor.swap.toString() !== "" ? flavor.swap.toString() + " MiB" : "0 MiB";
+            displayableRam = Utils.getDisplayableValue(flavor.ram, "MiB");
+            displayableDisk = Utils.getDisplayableValue(flavor.disk, "GiB");
+            displayableSwap = Utils.getDisplayableValue(flavor.swap, "MiB");
 
             row = dataTable.api().row.add([
                 flavor.id,
