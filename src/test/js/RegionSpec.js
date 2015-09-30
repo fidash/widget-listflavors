@@ -14,6 +14,9 @@ describe('Region Module', function () {
 
     beforeEach(function () {
 
+        // Deselect all regions
+        $('input').prop('checked', false);
+
         jasmine.getFixtures().fixturesPath = 'base/src/test/fixtures/html';
         loadFixtures('regionSelector.html');
 
@@ -29,15 +32,8 @@ describe('Region Module', function () {
     });
 
     afterEach(function () {
-
-        $('input').prop('checked', false);
         jasmine.resetAll(JSTACK.Keystone);
         $('.FixedHeader_Cloned.fixedHeader.FixedHeader_Header > table').empty();
-
-    });
-
-    it('should return Spain2 when there is no platform region and there are no current regions', function () {
-        expect(Region.getCurrentRegions()).toEqual(["Spain2"]);
     });
 
     it('should return the current regions after having set them', function () {

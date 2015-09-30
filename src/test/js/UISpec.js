@@ -249,4 +249,8 @@ describe('User Interface', function () {
         expect('input[value=Spain2]').toHaveProp('checked', false);
         
     });
+
+    it('should select Spain2 by default when loading the widget', function () {
+        expect($('input[value=Spain2]').prop('checked')).toEqual(true);
+    });
 });
