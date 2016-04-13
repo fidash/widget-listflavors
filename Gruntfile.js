@@ -1,4 +1,4 @@
-/* 
+/*
  * @copyright 2014 CoNWeT Lab., Universidad Politécnica de Madrid
  * @license Apache v2 (http://www.apache.org/licenses/)
  */
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
     compress: {
       widget: {
         options: {
-          archive: 'build/<%= pkg.vendor %>_<%= pkg.name %>_<%= pkg.version %><%= isDev %>.wgt',
+          archive: 'dist/<%= pkg.vendor %>_<%= pkg.name %>_<%= pkg.version %><%= isDev %>.wgt',
           mode: 'zip',
           level: 9,
           pretty: true

@@ -2,3 +2,5 @@ node_modules/
 build/
 .idea/
 cookies.txt
+dist/
+/.tern-port

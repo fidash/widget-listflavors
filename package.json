@@ -1,7 +1,7 @@
 {
   "name": "ListFlavors",
   "homepage": "https://github.com/fidash/widget-listflavors",
-  "version": "0.6.0",
+  "version": "0.9.0",
   "vendor": "UPM-ETSIINF",
   "author": "CoNWeT Lab., Universidad Politecnica de Madrid",
   "description": "A widget showing a list of current flavors available for a user of an openstack instance.",
