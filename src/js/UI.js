@@ -26,6 +26,7 @@ var UI = (function () {
         dataTable = $('#flavors_table').dataTable({
             'columns': columns,
             "columnDefs": [
+                { className: "text-right", targets: [2, 3, 4] },
                 {
                     "targets": hiddenColumns,
                     "visible": false
@@ -56,7 +57,7 @@ var UI = (function () {
 
         searchButton.on('click', function () {
             focusState = !focusState;
-            
+
             searchInput.toggleClass('slideRight');
             searchButton.parent()
                 .css('z-index', 20);
@@ -92,7 +93,7 @@ var UI = (function () {
             .click(refreshCallback.bind(null, false))
             .insertBefore(nextElement);
     }
-    
+
     function createRegionsButton (nextElement) {
         $('<button>')
             .html('<i class="fa fa-globe"></i>')
@@ -115,15 +116,15 @@ var UI = (function () {
         });
 
         regions.forEach(function(region) {
-            
+
             var checked = false;
-            
+
             $('<div>')
                 .html('<input type="checkbox" name="region" value="' + region + '" /> ' + region)
                 .addClass('region-container')
                 .click(function (e) {
                     var input = $('input', this);
-                    checked = !checked; 
+                    checked = !checked;
 
                     input.toggleClass('selected');
                     input.prop('checked', checked);
@@ -178,7 +179,7 @@ var UI = (function () {
             }
 
             setEditEvents(flavor, updateCallback);
-            
+
         });
     }
 
@@ -233,7 +234,7 @@ var UI = (function () {
     }
 
     function createFormRegionSelector () {
-        
+
         var availableRegions = Region.getAvailableRegions();
         var currentRegions = Region.getCurrentRegions();
         var regionFormSelector = $('#region');
@@ -252,7 +253,7 @@ var UI = (function () {
     }
 
     function getEditButtonHTML (parent) {
-    
+
         $('<button>')
             .addClass('btn btn-primary')
             .attr('name', 'edit-button')
@@ -260,7 +261,7 @@ var UI = (function () {
             .attr('data-toggle', 'modal')
             .attr('data-target', '#updateFlavorModal')
             .appendTo(parent);
-    
+
     }
 
     function getDeleteButtonHTML (parent) {
@@ -321,7 +322,7 @@ var UI = (function () {
         });
 
         initFixedHeader();
-        
+
     }
 
     function updateHiddenColumns () {
@@ -337,11 +338,11 @@ var UI = (function () {
         ];
 
         hiddenColumns = [];
-        
+
         preferenceList.forEach(function (preference, index) {
 
             display = MashupPlatform.prefs.get(preference);
-            
+
             if (!display) {
                 hiddenColumns.push(index);
             }
