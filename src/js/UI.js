@@ -19,8 +19,8 @@ var UI = (function () {
             {'title': 'VCPUs'},
             {'title': 'Disk'},
             {'title': 'Swap'},
-            {'title': 'Region'},
-            {'title': 'Actions'}
+            {'title': 'Region'}
+            // {'title': 'Actions'}
         ];
 
         dataTable = $('#flavors_table').dataTable({
@@ -148,8 +148,8 @@ var UI = (function () {
 
         // Launch button
         var wrapper = $('<div>');
-        getEditButtonHTML(wrapper);
-        getDeleteButtonHTML(wrapper);
+        // getEditButtonHTML(wrapper);
+        // getDeleteButtonHTML(wrapper);
 
         // Clear previous elements
         dataTable.api().clear();
@@ -167,8 +167,8 @@ var UI = (function () {
                 flavor.vcpus,
                 displayableDisk,
                 displayableSwap,
-                flavor.region,
-                wrapper.html()
+                flavor.region
+                // wrapper.html()
             ])
             .draw()
             .nodes()
@@ -178,7 +178,7 @@ var UI = (function () {
                 row.addClass('selected');
             }
 
-            setEditEvents(flavor, updateCallback);
+            // setEditEvents(flavor, updateCallback);
 
         });
     }
