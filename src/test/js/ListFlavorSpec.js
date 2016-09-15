@@ -139,7 +139,7 @@ describe('List Flavor', function () {
         expect(setTimeoutSpy).toHaveBeenCalledWith(jasmine.any(Function), 4000);
     });
 
-    it('should call createFlavor function when click event is triggered on the create flavor button', function () {
+    /*it('should call createFlavor function when click event is triggered on the create flavor button', function () {
 
         var createButton = $("#create-flavor");
         var spyEvent, region;
@@ -161,7 +161,7 @@ describe('List Flavor', function () {
         expect('click').toHaveBeenTriggeredOn('#create-flavor');
         expect(JSTACK.Nova.createflavor).toHaveBeenCalledWith(name, ram, vcpus, disk, id, undefined, undefined, undefined, jasmine.any(Function), jasmine.any(Function), region);
 
-    });
+    });*/
 
     it('should show an error alert with the message' + 
        ' received writen on it when ir doesn\'t recognize the error', function () {

@@ -302,7 +302,7 @@ var UI = (function () {
         createRegionSelector();
         createFormRegionSelector();
         createRegionsButton($('#flavors_table_paginate'));
-        createModalButton($('#flavors_table_paginate'));
+        //createModalButton($('#flavors_table_paginate'));
         createSearchField($('#flavors_table_paginate'));
         createRefreshButton($('#flavors_table_paginate'), callbacks.refresh);
 
